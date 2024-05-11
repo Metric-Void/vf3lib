@@ -70,6 +70,7 @@ namespace vflib
 		MatchingVisitor<VFState> *visit;
 		uint32_t solCount;
 		bool storeSolutions;
+		bool induced;
 		struct timeval fist_solution_time;
 
 		#ifdef TRACE
@@ -77,11 +78,11 @@ namespace vflib
 		#endif
 
 	public:
-		MatchingEngine(bool storeSolutions = false): visit(NULL), 
-			solCount(0), storeSolutions(storeSolutions){};
+		MatchingEngine(bool storeSolutions = false, bool induced=true): visit(NULL), 
+			solCount(0), storeSolutions(storeSolutions), induced(induced) {};
 
-		MatchingEngine(MatchingVisitor<VFState> *visit, bool storeSolutions = false):
-		 visit(visit), solCount(0), storeSolutions(storeSolutions){}
+		MatchingEngine(MatchingVisitor<VFState> *visit, bool storeSolutions = false, bool induced=true):
+		 visit(visit), solCount(0), storeSolutions(storeSolutions), induced(induced){}
 
 		#ifdef TRACE
 		inline void FlushTrace()

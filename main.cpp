@@ -84,7 +84,10 @@ void solve(Options& opt, std::istream& graphInPat, std::istream& graphInTarg,
   state_counter = 0;
   size_t sols = 0;
 
+  std::cout << "Loading Pattern" << std::endl;
   ARGLoader<Node, Edge>* pattloader = CreateLoader<Node, Edge>(opt, graphInPat);
+
+  std::cout << "Loading Target" << std::endl;
   ARGLoader<Node, Edge>* targloader =
       CreateLoader<Node, Edge>(opt, graphInTarg);
 
@@ -146,7 +149,7 @@ void solve(Options& opt, std::istream& graphInPat, std::istream& graphInTarg,
 #endif
 
       StateType s0(&patt_graph, &targ_graph, class_patt.data(),
-                   class_targ.data(), classes_count, sorted.data());
+                   class_targ.data(), classes_count, sorted.data(), opt.induced);
       me->FindAllMatchings(s0);
 #ifdef TRACE
       me->FlushTrace();

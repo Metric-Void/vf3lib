@@ -20,6 +20,7 @@ struct OptionStructure {
   char *target;
   bool undirected;
   bool storeSolutions;
+  bool induced;
 #ifdef VF3P
   int8_t algo;
   int16_t cpu;
@@ -37,6 +38,7 @@ struct OptionStructure {
         target(nullptr),
         undirected(false),
         storeSolutions(false),
+        induced(true),
 #ifdef VF3P
         algo(1),
         cpu(-1),
@@ -46,7 +48,7 @@ struct OptionStructure {
         ssrLocalStackLimit(10),
 #endif
         verbose(0),
-        format("vf"),
+        format("vfe"),
         repetitionTimeLimit(1) {
   }
 };
@@ -79,9 +81,9 @@ bool GetOptions(Options &opt, int argc, char **argv) {
    * -v Verbose: show all time
    */
 #ifdef VF3P
-  std::string optionstring = ":a:c:t:r:f:h:l:sukv";
+  std::string optionstring = ":a:c:t:r:f:h:l:sukvm";
 #else
-  std::string optionstring = ":r:f:suv";
+  std::string optionstring = ":r:f:suvm";
 #endif
 
   char option;
@@ -121,6 +123,9 @@ bool GetOptions(Options &opt, int argc, char **argv) {
         break;
       case 'f':
         opt.format = std::string(optarg);
+        break;
+      case 'm':
+        opt.induced = false;
         break;
       case '?':
         PrintUsage();

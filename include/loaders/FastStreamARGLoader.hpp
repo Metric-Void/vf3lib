@@ -63,7 +63,7 @@ FastStreamARGLoader<Node, Edge>::FastStreamARGLoader(std::istream &in,
     for (j = 0; j < edge_count; j++) {
       in >> n1 >> n2;
       if (n1 != i || n2 >= node_count || n1 == n2)
-        error("Error in file format reading edge", n1, n2);
+        error("Error in file format reading edge %d %d. i=%d, node_count=%d", n1, n2, i, node_count);
       in >> edges[n1][n2];
       if (undirected) edges[n2][n1] = edges[n1][n2];
     }
